@@ -2,9 +2,8 @@
 #include <cassert>
 #include <iostream>
 #include <fstream>
-#include <mach-o/swap.h>
-#include <mach-o/loader.h>
-#include <mach-o/fixup-chains.h>
+#include "mach-o/loader.h"
+#include "mach-o/fixup-chains.h"
 
 /*
 31   28   24   20   16   12    8    4    0
@@ -336,6 +335,8 @@ void start_disassemble_process(const char* filename)
 
 int main(int argc, char* argv[])
 {
-  assert(argc == 2);
-  start_disassemble_process(argv[1]);
+  if (argc != 2)
+    std::cout << "Usage: ./main [macho64 binary]\n";
+  else
+    start_disassemble_process(argv[1]);
 }
